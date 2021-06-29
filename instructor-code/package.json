@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "start:dev": "nodemon ./bin/www"
+    "start:dev": "nodemon ./bin/www",
+    "start:teach": "PORT=3001 DEBUG=books-with-seeds:* ../node_modules/.bin/nodemon ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",

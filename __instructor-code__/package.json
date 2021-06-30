@@ -1,17 +1,18 @@
 {
-  "name": "02-basic-auth",
+  "name": "basic-auth",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "start:dev": "nodemon ./bin/www",
-    "start:teach": "PORT=3001 DEBUG=books-with-seeds:* ../node_modules/.bin/nodemon ./bin/www"
+    "start:teach": "PORT=3001 ../node_modules/.bin/nodemon ./bin/www",
+    "start:debug": "DEBUG=basic-auth:* ../node_modules/.bin/nodemon ./bin/www"
   },
   "dependencies": {
     "bcryptjs": "latest",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "express-session": "^1.17.2",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "mongoose": "^5.9.10",

@@ -3,9 +3,17 @@ const authRouter = express.Router();
 const User = require("./../models/user-model");
 
 const bcrypt = require("bcrypt");
-const saltRounds = 12;
+const saltRounds = 5;
 
 const zxcvbn = require("zxcvbn");
+
+
+// GET  '/auth/login'
+authRouter.get("/login", (req, res) => {
+  console.log("Inside login")
+  res.render("auth-views/login-form");
+});
+
 
 // GET    '/auth/signup'     -  Renders the signup form
 authRouter.get("/signup", (req, res) => {
@@ -38,7 +46,7 @@ authRouter.post("/signup", (req, res, next) => {
   // }
 
   // 3. Check if the username is not taken
-  User.findOne({ username })
+  User.findOne({ username }) // This is the sugar syntax for {"username": username}
     .then((userObj) => {
       if (userObj) {
         // if user was found

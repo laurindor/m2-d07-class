@@ -71,4 +71,11 @@ authRouter.post("/signup", (req, res, next) => {
   // X.  Catch errors coming from calling to User collection
 });
 
+// GET  '/auth/login'
+authRouter.get("/login", (req, res) => {
+  console.log("Inside login")
+  res.render("auth-views/login-form");
+});
+
+
 module.exports = authRouter;

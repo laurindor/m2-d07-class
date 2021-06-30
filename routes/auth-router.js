@@ -8,6 +8,31 @@ const saltRounds = 5;
 const zxcvbn = require("zxcvbn");
 
 
+
+authRouter.post('/login', (req, res)=>{
+  const { username, password } =req.body
+  // 1. Check if the username and password are provided
+  if (username === "" || password === "") {
+    res.render("auth-views/login-form", { errorMessage: "Username and Password are required." });
+    return; // stops the execution of the function further
+  }
+  
+  User.findOne({username})
+  .then(user=>{
+         // 3.1 If the user is not found, show error message
+         if (!user) {
+          res.render("auth-views/login-form", { errorMessage: "Input invalid" });
+        } else {
+        // 3.2 If user exists ->  Check if the password is correct
+        const encryptedPassword = user.password;
+        const passwordCorrect = bcrypt.compareSync(password, encryptedPassword);
+        // After this line we know that the user exist and if they typed the correct password
+
+        }
+  })
+
+})
+
 // GET  '/auth/login'
 authRouter.get("/login", (req, res) => {
   console.log("Inside login")

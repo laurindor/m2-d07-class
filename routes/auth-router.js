@@ -111,4 +111,16 @@ authRouter.post("/signup", (req, res, next) => {
   // X.  Catch errors coming from calling to User collection
 });
 
+authRouter.get('/logout', (req, res)=>{
+  req.session.destroy(err=>{
+    if(err){
+      res.render("error", { message: "Something went wrong! Yikes!" });
+    }else{
+      res.redirect('/')
+    }
+  })
+})
+
+
+
 module.exports = authRouter;

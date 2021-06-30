@@ -7,6 +7,7 @@ const logger = require("morgan");
 
 const indexRouter = require("./routes/index-router");
 const authRouter = require("./routes/auth-router");
+const siteRouter = require ("./routes/site-router");
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use(
 );
 
 // ROUTES
+app.use('/site', siteRouter)
 app.use("/auth", authRouter);
 app.use("/", indexRouter);
 

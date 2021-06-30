@@ -13,7 +13,6 @@ const app = express();
 // require database configuration
 require('./configs/db.config');
 
-
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 

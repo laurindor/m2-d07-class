@@ -8,7 +8,7 @@
     "start:teach": "PORT=3001 DEBUG=books-with-seeds:* ../node_modules/.bin/nodemon ./bin/www"
   },
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "bcryptjs": "latest",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",

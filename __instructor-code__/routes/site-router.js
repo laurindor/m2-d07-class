@@ -1,29 +1,22 @@
 const express = require('express');
-const siteRouter = express.Router()
+const siteRouter = express.Router();
 
-siteRouter.use((req, res, next)=>{
-  console.log(req.session.currentUser)
-  if(req.session.currentUser){
-    next()
-  }else{
-    res.redirect('/auth/login')
-  }
-})
+const isLoggedIn = require('./../middleware/isLoggedIn')
 
-siteRouter.get('/protected', (req, res, next) => {
-  res.render('site/protected-webpage');
-})
+siteRouter.get('/protected', isLoggedIn, (req, res, next) => {
+	res.render('site/protected-webpage');
+});
 
 siteRouter.get('/personal', (req, res, next) => {
-  res.render('site/personal-webpage');
-})
+	res.render('site/personal-webpage');
+});
 
 siteRouter.get('/profile', (req, res, next) => {
-  res.render('site/profile-webpage');
-})
+	res.render('site/profile-webpage');
+});
 
 siteRouter.get('/', (req, res, next) => {
-  res.render('site/index');
-})
+	res.render('site/index');
+});
 
 module.exports = siteRouter;

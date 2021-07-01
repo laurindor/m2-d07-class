@@ -9,6 +9,7 @@ const saltRounds = process.env.SALT || 10;
 const zxcvbn = require("zxcvbn");
 
 authRouter.post("/login", (req, res)=>{
+  
   const {username, password} = req.body
 
   // 1. Check if the username and password are provided
@@ -54,11 +55,12 @@ authRouter.get("/signup", (req, res) => {
 
 // POST    '/auth/signup'
 authRouter.post("/signup", (req, res, next) => {
+
   // 1. Get the username and password from req.body
   const { username, password } = req.body;
 
   // 2.1 Check if the username and password are provided
-  if (username === "" || password === "") {
+  if (username === "" || password === "" || password.length < 5) /* !email.includes('@')) */  {
     res.render("auth-views/signup-form", {
       errorMessage: "Username and Password are required.",
     });
@@ -80,6 +82,7 @@ authRouter.post("/signup", (req, res, next) => {
   // 3. Check if the username is not taken
   User.findOne({ username }) // This is the sugar syntax for {"username": username}
     .then((userObj) => {
+      
       if (userObj) {
         // if user was found
         res.render("auth-views/signup-form", {
@@ -100,9 +103,13 @@ authRouter.post("/signup", (req, res, next) => {
             res.redirect("/");
           })
           .catch((err) => {
+           if(err instanceof mongoose.Error.ValidationError){
             res.render("auth-views/signup-form", {
-              errorMessage: `Error during signup`,
+              errorMessage: err.message,
             });
+           } else{
+             next(err)
+           }
           });
       }
     })

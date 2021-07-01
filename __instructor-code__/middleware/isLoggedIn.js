@@ -1,12 +1,15 @@
-// Middleware function - checks if the user is authenticated
 function isLoggedIn(req, res, next) {
-  if (req.session.currentUser) { // If user is authenticated
+	
+  console.log(req.session.currentUser);
+
+	if (req.session.currentUser) {
+	
     next();
+	
   } else {
+	
     res.redirect('/auth/login');
-  }
+	}
 }
 
-
-
-module.exports = isLoggedIn;
+module.exports = isLoggedIn
